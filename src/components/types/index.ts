@@ -3,7 +3,9 @@ export interface VacancyState {
 	loading: boolean;
 	error: null | string
 }
-
+// export type EventProps = {
+// 	onClick: () => void
+// }
 export interface IArea {
 	name: string;
 }

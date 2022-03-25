@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchVacancies } from '../../actions/vacancies';
+import { IVacancy } from '../types';
 import './vacancy.sass';
 
+// interface IVacancyProps {
+// 	vacancyId: any;
+// }
+// interface IVacancyState {
+// 	vacancyItem: IVacancy[];
+// }
+interface VacancyInterface {
+	// vacancyItem: IVacancy[];
+	vacancyId: any;
+	// updateVacancy: () => void;
+}
+const Vacancy: React.FC<VacancyInterface> = ({ vacancyId }) => {
+	// const { name, area, employer, published_at } = vacancyItem;
+	const dispatch = useDispatch()
+	const [vacancyItem, setVacancyItem] = useState();
 
-const Vacancy: React.FC = () => {
+	// useEffect(() => {
+	// 	updateVacancy();
+	// })
+	console.log(vacancyId)
 
+	const updateVacancy = () => {
+		if (!vacancyId) {
+			return;
+		}
+
+		dispatch(fetchVacancies())
+		// .then((vacancyItem) => {
+		// 	setVacancyItem(vacancyItem)
+		// })
+	}
 
 	return (
 		<div className="vacancy">
