@@ -1,16 +1,16 @@
 import { Dispatch } from "redux";
 import axios from "axios";
-import { VacancyAction, VacancyActionTypes } from "../components/types";
+import { VacanciesAction, VacanciesActionTypes } from "../components/types";
 
 export const fetchVacancies = () => {
-	return async (dispatch: Dispatch<VacancyAction>) => {
+	return async (dispatch: Dispatch<VacanciesAction>) => {
 		try {
-			dispatch({ type: VacancyActionTypes.FETCH_VACANCIES })
+			dispatch({ type: VacanciesActionTypes.FETCH_VACANCIES })
 			const response = await axios.get('https://api.hh.ru/vacancies')
-			dispatch({ type: VacancyActionTypes.FETCH_VACANCIES_SUCCES, payload: response.data })
+			dispatch({ type: VacanciesActionTypes.FETCH_VACANCIES_SUCCESS, payload: response.data })
 		} catch (e) {
 			dispatch({
-				type: VacancyActionTypes.FETCH_VACANCIES_ERROR,
+				type: VacanciesActionTypes.FETCH_VACANCIES_ERROR,
 				payload: 'Произошла ошибка при загрузке вакансий'
 			})
 		}

@@ -1,11 +1,15 @@
-export interface VacancyState {
+export interface VacanciesState {
 	vacancies: { items: IVacancy[] };
 	loading: boolean;
 	error: null | string
 }
-// export type EventProps = {
-// 	onClick: () => void
-// }
+
+export interface VacancyState {
+	vacancy: any;
+	loading: boolean;
+	error: null | string
+}
+
 export interface IArea {
 	name: string;
 }
@@ -21,22 +25,41 @@ export interface IVacancy {
 	published_at: string;
 }
 
-export enum VacancyActionTypes {
+export enum VacanciesActionTypes {
 	FETCH_VACANCIES = 'FETCH_VACANCIES',
-	FETCH_VACANCIES_SUCCES = 'FETCH_VACANCIES_SUCCES',
+	FETCH_VACANCIES_SUCCESS = 'FETCH_VACANCIES_SUCCESS',
 	FETCH_VACANCIES_ERROR = 'FETCH_VACANCIES_ERROR',
 }
 
 interface FetchVacanciesAction {
-	type: VacancyActionTypes.FETCH_VACANCIES;
+	type: VacanciesActionTypes.FETCH_VACANCIES;
 }
 interface FetchVacanciesSuccesAction {
-	type: VacancyActionTypes.FETCH_VACANCIES_SUCCES;
+	type: VacanciesActionTypes.FETCH_VACANCIES_SUCCESS;
 	payload: { items: [] };
 }
 interface FetchVacanciesErrorAction {
-	type: VacancyActionTypes.FETCH_VACANCIES_ERROR;
+	type: VacanciesActionTypes.FETCH_VACANCIES_ERROR;
 	payload: string;
 }
 
-export type VacancyAction = FetchVacanciesAction | FetchVacanciesSuccesAction | FetchVacanciesErrorAction;
+export enum VacancyActionTypes {
+	FETCH_VACANCY = 'FETCH_VACANCY',
+	FETCH_VACANCY_SUCCESS = 'FETCH_VACANCY_SUCCESS',
+	FETCH_VACANCY_ERROR = 'FETCH_VACANCY_ERROR',
+}
+
+interface FetchVacancyAction {
+	type: VacancyActionTypes.FETCH_VACANCY;
+}
+interface FetchVacancySuccesAction {
+	type: VacancyActionTypes.FETCH_VACANCY_SUCCESS;
+	payload: {};
+}
+interface FetchVacancyErrorAction {
+	type: VacancyActionTypes.FETCH_VACANCY_ERROR;
+	payload: string;
+}
+
+export type VacanciesAction = FetchVacanciesAction | FetchVacanciesSuccesAction | FetchVacanciesErrorAction;
+export type VacancyAction = FetchVacancyAction | FetchVacancySuccesAction | FetchVacancyErrorAction;

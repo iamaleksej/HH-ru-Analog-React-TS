@@ -3,24 +3,29 @@ import './vacancies-item.sass';
 import iconNoFavorite from '../../assets/img/icon-favorite-no-active.png';
 import iconFavorite from '../../assets/img/icon-favorite-active.png';
 import { IVacancy } from '../types';
+import { fetchVacancy } from '../../actions/vacancy';
+import { useDispatch } from 'react-redux';
 
-interface IComponentProps {
-	vacancy: IVacancy;
-	onVacancySelected: (id: number) => void;
-	id: number;
 
-}
+const VacanciesItem: React.FC<{ vacanciesItem: IVacancy }> = ({ vacanciesItem }) => {
+	const { id, name, area, employer, published_at } = vacanciesItem;
 
-const VacanciesItem: React.FC<IComponentProps> = ({ vacancy, onVacancySelected, id }) => {
-	const { name, area, employer, published_at } = vacancy;
+	const dispatch = useDispatch()
 
-	// let publishedDate = new Date(published_at);
+
 	let publishedDate = new Date(published_at).getDate() + '.'
 		+ Number(new Date(published_at).getMonth() + 1) + '.'
 		+ new Date(published_at).getFullYear();
+
+	const onVacancySelected = () => {
+		dispatch(fetchVacancy(id))
+	}
+
+
+
 	return (
 		<div className="vacancies__item"
-			onClick={() => onVacancySelected(id)}>
+			onClick={onVacancySelected}>
 			<div className="vacancies__line"></div>
 			<div className="vacancies__logo-block">
 				<div className="vacancies__logo">
@@ -31,11 +36,6 @@ const VacanciesItem: React.FC<IComponentProps> = ({ vacancy, onVacancySelected, 
 				<p className="vacancies__company">{employer.name}</p>
 				<p className="vacancies__title">{name}</p>
 				<p className="vacancies__city">{area.name}</p>
-				{/* <div className="vacancies-skills">
-					<div className="vacancies-skills__item">jQuery</div>
-					<div className="vacancies-skills__item">CSS</div>
-					<div className="vacancies-skills__item">React</div>
-				</div> */}
 			</div>
 			<div className="vacancies__icon-block">
 				<div className="vacancies__icon-favorite">
