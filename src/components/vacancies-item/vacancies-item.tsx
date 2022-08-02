@@ -7,7 +7,7 @@ import { fetchVacancy } from '../../actions/vacancy';
 import { useDispatch } from 'react-redux';
 
 
-const VacanciesItem: React.FC<{ vacanciesItem: IVacancy }> = ({ vacanciesItem }) => {
+const VacanciesItem: React.FC<{ vacanciesItem: IVacancy, filter: string }> = ({ vacanciesItem, filter }) => {
 	const { id, name, area, employer, published_at } = vacanciesItem;
 
 	const dispatch = useDispatch()
@@ -21,11 +21,13 @@ const VacanciesItem: React.FC<{ vacanciesItem: IVacancy }> = ({ vacanciesItem })
 		dispatch(fetchVacancy(id))
 	}
 
+	console.log()
 
-
+	// if (filter === 'full') {
 	return (
 		<div className="vacancies__item"
 			onClick={onVacancySelected}>
+
 			<div className="vacancies__line"></div>
 			<div className="vacancies__logo-block">
 				<div className="vacancies__logo">
@@ -47,6 +49,7 @@ const VacanciesItem: React.FC<{ vacanciesItem: IVacancy }> = ({ vacanciesItem })
 		</div>
 	)
 }
+// }
 
 
 export default VacanciesItem;

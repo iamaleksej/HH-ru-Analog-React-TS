@@ -10,7 +10,15 @@ const Vacancy: React.FC = () => {
 		return { __html: description };
 	}
 
-	// console.log(description)
+	if (loading) {
+		return <h1>Загурзка...</h1>
+	}
+
+	if (error) {
+		return <h1>{error}</h1>
+	}
+	if (Object.entries(vacancy).length != 0) console.log(vacancy.schedule.name)
+
 	return (
 		<>
 			{(Object.entries(vacancy).length != 0) ?
