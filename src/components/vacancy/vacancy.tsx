@@ -13,17 +13,27 @@ const Vacancy: React.FC = () => {
 	if (loading) {
 		return <h1>Загурзка...</h1>
 	}
-
 	if (error) {
 		return <h1>{error}</h1>
 	}
-	if (Object.entries(vacancy).length != 0) console.log(vacancy.schedule.name)
 
+	const checkSalary = () => {
+		if (!salary) return ''
+		else {
+			if (!salary.from && salary.to) return salary.to + ' руб.'
+			else if (salary.from && !salary.to) return salary.from + ' руб.'
+			else return 'от ' + salary.from + ' до ' + salary.to + ' руб.'
+		}
+
+	}
+
+	if (Object.entries(vacancy).length !== 0) console.log(vacancy.schedule.name)
+	// console.log(vacancy.schedule)
 	return (
 		<>
-			{(Object.entries(vacancy).length != 0) ?
+			{(Object.entries(vacancy).length !== 0) ?
 				<div className="vacancy">
-					<div className="vacancy_wrapper">
+					<div className="vacancy-wrapper">
 						<div className="vacancy-header">
 							<div className="vacancy-header__upper-wrapper">
 								<div className="vacancy-header__logo">
@@ -38,10 +48,8 @@ const Vacancy: React.FC = () => {
 								</div>
 							</div>
 							<p className="vacancy-header__salary">
-								{(salary.from && salary.to) ? 'от ' : ''}
-								{salary.from}
-								{(salary.from && salary.to) ? ' до ' : ''}
-								{salary.to} руб.</p>
+								{checkSalary()}
+							</p>
 						</div>
 						<div className="vacancy-description"
 							dangerouslySetInnerHTML={vacancyDescription()}></div>

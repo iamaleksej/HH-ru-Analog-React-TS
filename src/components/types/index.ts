@@ -2,7 +2,7 @@ export interface VacanciesState {
 	vacancies: { items: IVacancy[] };
 	loading: boolean;
 	error: null | string;
-	filter: string
+	filter: string[]
 }
 
 export interface VacancyState {
@@ -25,11 +25,8 @@ export interface IVacancy {
 	employer: IEmployer;
 	published_at: string;
 	employment: { id: string; name: string; };
+	schedule: { name: string }
 }
-
-// export interface IFilter {
-// 	filter: string;
-// }
 
 export enum VacanciesActionTypes {
 	FETCH_VACANCIES = 'FETCH_VACANCIES',
@@ -51,7 +48,7 @@ interface FetchVacanciesErrorAction {
 }
 interface VacanciesFilteredAction {
 	type: VacanciesActionTypes.VACANCIES_FILTERED;
-	payload: string;
+	payload: string[];
 }
 
 export enum VacancyActionTypes {

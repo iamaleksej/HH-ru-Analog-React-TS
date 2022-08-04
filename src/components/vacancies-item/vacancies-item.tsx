@@ -6,9 +6,13 @@ import { IVacancy } from '../types';
 import { fetchVacancy } from '../../actions/vacancy';
 import { useDispatch } from 'react-redux';
 
+const VacanciesItem: React.FC<{ filter: string[], vacanciesItemBlock: any }> = ({ filter, vacanciesItemBlock }) => {
 
-const VacanciesItem: React.FC<{ vacanciesItem: IVacancy, filter: string }> = ({ vacanciesItem, filter }) => {
-	const { id, name, area, employer, published_at } = vacanciesItem;
+	return vacanciesItemBlock
+}
+
+const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: string[] }> = ({ vacanciesItem, filter }) => {
+	const { id, name, area, employer, published_at, schedule } = vacanciesItem;
 
 	const dispatch = useDispatch()
 
@@ -20,36 +24,40 @@ const VacanciesItem: React.FC<{ vacanciesItem: IVacancy, filter: string }> = ({ 
 	const onVacancySelected = () => {
 		dispatch(fetchVacancy(id))
 	}
+	console.log(filter,
+		document.querySelectorAll('.vacancies__item'))
+	const vacanciesItemBlock = (
+		(filter.includes(schedule.name)) ? (
+			<div className="vacancies__item"
+				onClick={onVacancySelected}>
 
-	console.log()
-
-	// if (filter === 'full') {
-	return (
-		<div className="vacancies__item"
-			onClick={onVacancySelected}>
-
-			<div className="vacancies__line"></div>
-			<div className="vacancies__logo-block">
-				<div className="vacancies__logo">
-					<img src={(employer.logo_urls === null) ? '' : employer.logo_urls.original} alt="Logo" className="image" />
+				<div className="vacancies__line"></div>
+				<div className="vacancies__logo-block">
+					<div className="vacancies__logo">
+						<img src={(employer.logo_urls === null) ? '' : employer.logo_urls.original} alt="Logo" className="image" />
+					</div>
+				</div>
+				<div className="vacancies__data-block">
+					<p className="vacancies__company">{employer.name}</p>
+					<p className="vacancies__title">{name}</p>
+					<p className="vacancies__city">{area.name}</p>
+				</div>
+				<div className="vacancies__icon-block">
+					<div className="vacancies__icon-favorite">
+						<img src={iconFavorite} alt="" className="image " />
+						<img src={iconNoFavorite} alt="" className="image icon-favorite-active" />
+					</div>
+					<div className="vacancies__date">{publishedDate}</div>
 				</div>
 			</div>
-			<div className="vacancies__data-block">
-				<p className="vacancies__company">{employer.name}</p>
-				<p className="vacancies__title">{name}</p>
-				<p className="vacancies__city">{area.name}</p>
-			</div>
-			<div className="vacancies__icon-block">
-				<div className="vacancies__icon-favorite">
-					<img src={iconFavorite} alt="" className="image " />
-					<img src={iconNoFavorite} alt="" className="image icon-favorite-active" />
-				</div>
-				<div className="vacancies__date">{publishedDate}</div>
-			</div>
-		</div>
+		) : null
 	)
+
+	return <VacanciesItem
+		filter={filter}
+		vacanciesItemBlock={vacanciesItemBlock} />
 }
-// }
 
 
-export default VacanciesItem;
+
+export default VacanciesItemContainer;

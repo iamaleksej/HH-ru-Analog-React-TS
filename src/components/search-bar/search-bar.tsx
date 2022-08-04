@@ -6,9 +6,12 @@ import filterIconImg2 from '../../assets/img/Vector2.png';
 import filterIconImg3 from '../../assets/img/Vector3.png';
 import filterIconImg4 from '../../assets/img/Vector4.png';
 import filterIconImg5 from '../../assets/img/Vector5.png';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { actionFilterSchedule } from '../../actions/filters';
 
 const SearchBar: React.FC = () => {
-
+	const dispatch = useDispatch();
 	const [schedule, setSchedule] = useState(false);
 	const [type, setType] = useState(false);
 	const [skill, setSkill] = useState(false);
@@ -53,109 +56,122 @@ const SearchBar: React.FC = () => {
 			<div className="filters-popup" ref={popupRef}>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox11"
-						name="filters-popup__checkbox1" />
+						className="filters-popup__schedule"
+						id="filters-popup__schedule11"
+						name="Полный день" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox11">Полный день</label>
+						htmlFor="filters-popup__schedule11">Полный день</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox12"
-						name="filters-popup__checkbox1" />
+						className="filters-popup__schedule"
+						id="filters-popup__schedule12"
+						name="Гибкий график" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox12">Гибкий график</label>
+						htmlFor="filters-popup__schedule12">Гибкий график</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox13"
-						name="filters-popup__checkbox1" />
+						className="filters-popup__schedule"
+						id="filters-popup__schedule13"
+						name="Удаленная работа" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox13">Удаленная работа</label>
+						htmlFor="filters-popup__schedule13">Удаленная работа</label>
 				</div>
 			</div>
 		)
 	}
 
-	const popupType = () => {
+	const popupEmployment = () => {
 		return (
 			<div className="filters-popup" ref={popupRef}>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox21"
-						name="filters-popup__checkbox2" />
+						className="filters-popup__employment"
+						id="filters-popup__employment21"
+						name="filters-popup__employment2" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox21">Полная занятость</label>
+						htmlFor="filters-popup__employment21">Полная занятость</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox22"
-						name="filters-popup__checkbox2" />
+						className="filters-popup__employment"
+						id="filters-popup__employment22"
+						name="filters-popup__employment2" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox22">Частичная занятость</label>
+						htmlFor="filters-popup__employment22">Частичная занятость</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox23"
-						name="filters-popup__checkbox2" />
+						className="filters-popup__employment"
+						id="filters-popup__employment23"
+						name="filters-popup__employment2" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox23">Проектная работа</label>
+						htmlFor="filters-popup__employment23">Проектная работа</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox24"
-						name="filters-popup__checkbox2" />
+						className="filters-popup__employment"
+						id="filters-popup__employment24"
+						name="filters-popup__employment2" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox24">Стажировка</label>
+						htmlFor="filters-popup__employment24">Стажировка</label>
 				</div>
 			</div>
 		)
 	}
 
-	const popupSkill = () => {
+	const popupExperience = () => {
 		return (
 			<div className="filters-popup" ref={popupRef}>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox31"
-						name="filters-popup__checkbox3" />
+						className="filters-popup__experience"
+						id="filters-popup__experience31"
+						name="filters-popup__experience3" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox31">Нет опыта</label>
+						htmlFor="filters-popup__experience31">Нет опыта</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox32"
-						name="filters-popup__checkbox3" />
+						className="filters-popup__experience"
+						id="filters-popup__experience32"
+						name="filters-popup__experience3" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox32">От 1 года до 3 лет</label>
+						htmlFor="filters-popup__experience32">От 1 года до 3 лет</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox33"
-						name="filters-popup__checkbox3" />
+						className="filters-popup__experience"
+						id="filters-popup__experience33"
+						name="filters-popup__experience3" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox33">От 3 до 6 лет</label>
+						htmlFor="filters-popup__experience33">От 3 до 6 лет</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						className="filters-popup__checkbox"
-						id="filters-popup__checkbox34"
-						name="filters-popup__checkbox3" />
+						className="filters-popup__experience"
+						id="filters-popup__experience34"
+						name="filters-popup__experience3" />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__checkbox34">Более 6 лет</label>
+						htmlFor="filters-popup__experience34">Более 6 лет</label>
 				</div>
 			</div>
 		)
 	}
+
+	const searchButton = () => {
+		let arrSchedule: string[] = [];
+		let scheduleChecked = document.querySelectorAll('.filters-popup__schedule:checked')
+		scheduleChecked as unknown as HTMLInputElement
+		scheduleChecked.forEach((el: any) => {
+			arrSchedule.push(el.name)
+		})
+		dispatch(actionFilterSchedule(arrSchedule))
+	}
+
+
+	// console.log(filter)
 
 	return (
 		<div className="filter-search">
@@ -180,7 +196,7 @@ const SearchBar: React.FC = () => {
 						<img src={filterIconImg3} alt="" className="image" />
 					</div>
 					<p className="filters__title">Частичная занятость</p>
-					{(type) ? popupType() : null}
+					{(type) ? popupEmployment() : null}
 				</div>
 				<div className="filters__item"
 					onClick={() => setSkill(true)}>
@@ -188,7 +204,7 @@ const SearchBar: React.FC = () => {
 						<img src={filterIconImg4} alt="" className="image" />
 					</div>
 					<p className="filters__title">От 1 года до 3 лет</p>
-					{(skill) ? popupSkill() : null}
+					{(skill) ? popupExperience() : null}
 				</div>
 				<div className="filters__item">
 					<div className="filters__icon">
@@ -198,7 +214,8 @@ const SearchBar: React.FC = () => {
 					<label className="filters__label "> руб.</label>
 				</div>
 			</div>
-			<div className="search">Поиск</div>
+			<div className="search"
+				onClick={searchButton}>Поиск</div>
 		</div >
 	)
 }
