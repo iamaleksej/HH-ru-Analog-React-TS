@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useForm } from "react-hook-form";
 import useLatest from "use-latest";
 import './search-bar.sass';
 import filterIconImg1 from '../../assets/img/Vector.png';
@@ -7,7 +8,6 @@ import filterIconImg3 from '../../assets/img/Vector3.png';
 import filterIconImg4 from '../../assets/img/Vector4.png';
 import filterIconImg5 from '../../assets/img/Vector5.png';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../hooks/useTypedSelector';
 import { actionFilterSchedule } from '../../actions/filters';
 
 const SearchBar: React.FC = () => {
@@ -15,8 +15,17 @@ const SearchBar: React.FC = () => {
 	const [schedule, setSchedule] = useState(false);
 	const [type, setType] = useState(false);
 	const [skill, setSkill] = useState(false);
+	const [check, setCheck] = useState({ 'fullDay': false, 'flexible': false, 'remote': false });
+	const sheduleNameFull = 'fullDay';
+	const sheduleNameFlex = 'flexible';
+	const sheduleNameRemote = 'remote';
 
 	const popupRef = useRef<HTMLInputElement>(null)
+
+	const soldCheckbox = (e: any) => {
+		setCheck(prevState => ({ ...prevState, [e.target.name]: e.target.checked }))
+	}
+
 	const onClose = () => {
 		setSchedule(false);
 		setType(false);
@@ -50,31 +59,36 @@ const SearchBar: React.FC = () => {
 	useOutsideClick(popupRef, onClose, schedule);
 	useOutsideClick(popupRef, onClose, type);
 	useOutsideClick(popupRef, onClose, skill);
-
 	const popupSchedule = () => {
 		return (
 			<div className="filters-popup" ref={popupRef}>
 				<div className="filters-popup__item">
 					<input type="checkbox"
+						checked={check[sheduleNameFull]}
+						onChange={soldCheckbox}
 						className="filters-popup__schedule"
 						id="filters-popup__schedule11"
-						name="Полный день" />
+						name={sheduleNameFull} />
 					<label className="filters-popup__label"
 						htmlFor="filters-popup__schedule11">Полный день</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
+						checked={check[sheduleNameFlex]}
+						onChange={soldCheckbox}
 						className="filters-popup__schedule"
 						id="filters-popup__schedule12"
-						name="Гибкий график" />
+						name={sheduleNameFlex} />
 					<label className="filters-popup__label"
 						htmlFor="filters-popup__schedule12">Гибкий график</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
+						checked={check[sheduleNameRemote]}
+						onChange={soldCheckbox}
 						className="filters-popup__schedule"
 						id="filters-popup__schedule13"
-						name="Удаленная работа" />
+						name={sheduleNameRemote} />
 					<label className="filters-popup__label"
 						htmlFor="filters-popup__schedule13">Удаленная работа</label>
 				</div>

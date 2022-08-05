@@ -25,7 +25,7 @@ export interface IVacancy {
 	employer: IEmployer;
 	published_at: string;
 	employment: { id: string; name: string; };
-	schedule: { name: string }
+	schedule: { id: string }
 }
 
 export enum VacanciesActionTypes {

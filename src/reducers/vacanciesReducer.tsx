@@ -4,7 +4,7 @@ const initialState: VacanciesState = {
 	vacancies: { items: [] },
 	loading: false,
 	error: null,
-	filter: ['Полный день', 'Гибкий график', 'Удаленная работа']
+	filter: ['fullDay', 'flexible', 'remote']
 }
 
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {

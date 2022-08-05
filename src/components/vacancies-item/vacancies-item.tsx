@@ -24,10 +24,11 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: string
 	const onVacancySelected = () => {
 		dispatch(fetchVacancy(id))
 	}
-	console.log(filter,
-		document.querySelectorAll('.vacancies__item'))
+	console.log(filter)
+	console.log(!schedule)
 	const vacanciesItemBlock = (
-		(filter.includes(schedule.name)) ? (
+		// если filter.length === 0 то дальше если в углубление
+		(filter.includes(schedule.id)) ? (
 			<div className="vacancies__item"
 				onClick={onVacancySelected}>
 
