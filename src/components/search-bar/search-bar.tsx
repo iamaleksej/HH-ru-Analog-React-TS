@@ -180,8 +180,12 @@ const SearchBar: React.FC = () => {
 		scheduleChecked as unknown as HTMLInputElement
 		scheduleChecked.forEach((el: any) => {
 			arrSchedule.push(el.name)
+			console.log(el, el.name)
+			// dispatch(actionFilterSchedule('schedule', el.name))
 		})
-		dispatch(actionFilterSchedule(arrSchedule))
+
+		dispatch(actionFilterSchedule('schedule', arrSchedule))
+		// console.log(el, el.name)
 	}
 
 

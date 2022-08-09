@@ -32,7 +32,10 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 		case VacanciesActionTypes.VACANCIES_FILTERED:
 			return {
 				...state,
-				filter: { ...state, action.payload }
+				filter: {
+					...state.filter,
+					[action.payload.filterName]: action.payload.filterData
+				}
 			}
 		default:
 			return state;

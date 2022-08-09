@@ -15,11 +15,11 @@ export interface IArea {
 	name: string;
 }
 
-export interface IFilter {
-	schedule: string[],
-	employment: string[],
-	experience: string[]
-}
+// export interface IFilter {
+// 	schedule: string[],
+// 	employment: string[],
+// 	experience: string[]
+// }
 
 export interface IEmployer {
 	name: string;

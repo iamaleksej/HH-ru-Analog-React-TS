@@ -1,9 +1,12 @@
 import { VacanciesActionTypes } from "../components/types";
 
-const actionFilterSchedule = (scheduleFilter: string[]) => {
+const actionFilterSchedule = (filterName: string, filterData: string[]) => {
 	return {
 		type: VacanciesActionTypes.VACANCIES_FILTERED,
-		payload: scheduleFilter
+		payload: {
+			filterName,
+			filterData
+		}
 	}
 }
 
