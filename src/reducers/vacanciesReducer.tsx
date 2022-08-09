@@ -4,11 +4,14 @@ const initialState: VacanciesState = {
 	vacancies: { items: [] },
 	loading: false,
 	error: null,
-	filter: ['fullDay', 'flexible', 'remote']
+	filter: {
+		schedule: [],
+		employment: [],
+		experience: []
+	}
 }
-
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {
-
+	console.log(state.filter)
 	switch (action.type) {
 		case VacanciesActionTypes.FETCH_VACANCIES:
 			return {
@@ -29,7 +32,7 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 		case VacanciesActionTypes.VACANCIES_FILTERED:
 			return {
 				...state,
-				filter: action.payload
+				filter: { ...state, action.payload }
 			}
 		default:
 			return state;

@@ -25,8 +25,7 @@ const VacanciesBar: React.FC = () => {
 	}
 
 	const vacItems = vacancies.items;
-	// console.log(filter)
-
+	console.log(filter)
 	return (
 		<div className="vacancies-bar">
 			<div className="vacancies">

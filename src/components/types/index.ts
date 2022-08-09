@@ -2,7 +2,7 @@ export interface VacanciesState {
 	vacancies: { items: IVacancy[] };
 	loading: boolean;
 	error: null | string;
-	filter: string[]
+	filter: {}
 }
 
 export interface VacancyState {
@@ -14,6 +14,13 @@ export interface VacancyState {
 export interface IArea {
 	name: string;
 }
+
+export interface IFilter {
+	schedule: string[],
+	employment: string[],
+	experience: string[]
+}
+
 export interface IEmployer {
 	name: string;
 	logo_urls: { original: string; 90: string; 240: string; };
