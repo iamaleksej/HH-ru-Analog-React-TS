@@ -2,7 +2,9 @@ export interface VacanciesState {
 	vacancies: { items: IVacancy[] };
 	loading: boolean;
 	error: null | string;
-	filter: {}
+	filter: {
+
+	}
 }
 
 export interface VacancyState {
@@ -55,7 +57,7 @@ interface FetchVacanciesErrorAction {
 }
 interface VacanciesFilteredAction {
 	type: VacanciesActionTypes.VACANCIES_FILTERED;
-	payload: string[];
+	payload: any
 }
 
 export enum VacancyActionTypes {

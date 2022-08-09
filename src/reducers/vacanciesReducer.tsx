@@ -4,11 +4,7 @@ const initialState: VacanciesState = {
 	vacancies: { items: [] },
 	loading: false,
 	error: null,
-	filter: {
-		schedule: [],
-		employment: [],
-		experience: []
-	}
+	filter: {}
 }
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {
 	console.log(state.filter)
@@ -30,6 +26,7 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 				error: action.payload
 			}
 		case VacanciesActionTypes.VACANCIES_FILTERED:
+			console.log(action.payload)
 			return {
 				...state,
 				filter: {
