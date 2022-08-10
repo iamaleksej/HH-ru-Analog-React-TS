@@ -2,9 +2,7 @@ export interface VacanciesState {
 	vacancies: { items: IVacancy[] };
 	loading: boolean;
 	error: null | string;
-	filter: {
-
-	}
+	filter: {}
 }
 
 export interface VacancyState {
@@ -35,6 +33,7 @@ export interface IVacancy {
 	published_at: string;
 	employment: { id: string; name: string; };
 	schedule: { id: string }
+	experience: { id: string }
 }
 
 export enum VacanciesActionTypes {

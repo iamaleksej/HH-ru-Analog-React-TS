@@ -7,7 +7,6 @@ const initialState: VacanciesState = {
 	filter: {}
 }
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {
-	console.log(state.filter)
 	switch (action.type) {
 		case VacanciesActionTypes.FETCH_VACANCIES:
 			return {
@@ -26,7 +25,6 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 				error: action.payload
 			}
 		case VacanciesActionTypes.VACANCIES_FILTERED:
-			console.log(action.payload)
 			return {
 				...state,
 				filter: {

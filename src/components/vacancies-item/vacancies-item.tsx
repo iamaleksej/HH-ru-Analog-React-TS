@@ -14,13 +14,20 @@ const VacanciesItem: React.FC<{
 	vacanciesItemBlock,
 	vacanciesItemBlockFilterSchedule }) => {
 
-		// return (!filter[schedule]) ? vacanciesItemBlock : vacanciesItemBlockFilterSchedule
-		return vacanciesItemBlock
+		// return (!Object.values(['schedule']).length) ? vacanciesItemBlock : vacanciesItemBlockFilterSchedule
+		return vacanciesItemBlockFilterSchedule
 
 	}
 
 const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> = ({ vacanciesItem, filter }) => {
-	const { id, name, area, employer, published_at, schedule } = vacanciesItem;
+	const { id,
+		name,
+		area,
+		employer,
+		published_at,
+		schedule,
+		employment,
+		experience } = vacanciesItem;
 
 	const dispatch = useDispatch()
 
@@ -58,7 +65,15 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 		</div>
 	)
 
-	const vacanciesItemBlockFilterSchedule = (filter.hasOwnProperty(schedule.id)) ? (
+	// Object.values(filter).map((item: any) => {
+	// 	// if (item.includes(schedule.id)) console.log(true)
+
+
+
+	// })
+	console.log(Object.values(filter).map((item: any) => item.includes(schedule.id)));
+
+	const vacanciesItemBlockFilterSchedule = (Object.values(filter).map((item: any) => item.includes(schedule.id))) ? (
 		<div className="vacancies__item"
 			onClick={onVacancySelected}>
 

@@ -27,7 +27,7 @@ const Vacancy: React.FC = () => {
 
 	}
 
-	if (Object.entries(vacancy).length !== 0) console.log(vacancy.schedule.name)
+	if (Object.entries(vacancy).length !== 0) console.log(vacancy.schedule)
 	// console.log(vacancy.schedule)
 	return (
 		<>

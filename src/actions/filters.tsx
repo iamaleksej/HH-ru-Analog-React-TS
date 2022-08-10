@@ -1,6 +1,6 @@
 import { VacanciesActionTypes } from "../components/types";
 
-const actionFilterSchedule = (filterName: string, filterData: string[]) => {
+const actionFilter = (filterName: string, filterData: string[]) => {
 	return {
 		type: VacanciesActionTypes.VACANCIES_FILTERED,
 		payload: {
@@ -10,4 +10,4 @@ const actionFilterSchedule = (filterName: string, filterData: string[]) => {
 	}
 }
 
-export { actionFilterSchedule }
+export { actionFilter }
