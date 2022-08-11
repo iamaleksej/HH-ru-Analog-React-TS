@@ -29,7 +29,7 @@ const VacanciesBar: React.FC = () => {
 	return (
 		<div className="vacancies-bar">
 			<div className="vacancies">
-				{vacItems.map(vacanciesItem =>
+				{vacItems.map((vacanciesItem: any) =>
 					<VacanciesItem
 						key={vacanciesItem.id}
 						vacanciesItem={vacanciesItem}

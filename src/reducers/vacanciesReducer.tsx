@@ -4,7 +4,11 @@ const initialState: VacanciesState = {
 	vacancies: { items: [] },
 	loading: false,
 	error: null,
-	filter: {}
+	filter: {
+		'schedule': [],
+		'employment': [],
+		'experience': []
+	}
 }
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {
 	switch (action.type) {

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import useLatest from 'use-latest';
 import { useForm } from "react-hook-form";
-import useLatest from "use-latest";
 import './search-bar.sass';
 import filterIconImg1 from '../../assets/img/Vector.png';
 import filterIconImg2 from '../../assets/img/Vector2.png';
@@ -10,30 +10,13 @@ import filterIconImg5 from '../../assets/img/Vector5.png';
 import { useDispatch } from 'react-redux';
 import { actionFilter } from '../../actions/filters';
 
+
 const SearchBar: React.FC = () => {
 	const dispatch = useDispatch();
 	const [schedule, setSchedule] = useState(false);
 	const [employment, setEmployment] = useState(false);
 	const [experience, setExperience] = useState(false);
-	// const [check, setCheck] = useState({
-	// 	'schedule': {
-	// 		'fullDay': false,
-	// 		'flexible': false,
-	// 		'remote': false
-	// 	},
-	// 	'employment': {
-	// 		'full': false,
-	// 		'little': false,
-	// 		'project': false,
-	// 		'intern': false
-	// 	},
-	// 	'experience': {
-	// 		'noExperience': false,
-	// 		'between1And3': false,
-	// 		'between3And6': false,
-	// 		'moreThan6': false
-	// 	}
-	// });
+
 	const [check, setCheck] = useState({
 		'fullDay': false,
 		'flexible': false,
@@ -110,27 +93,20 @@ const SearchBar: React.FC = () => {
 	let arrSchedule: string[] = [];
 	let arrEmployment: string[] = [];
 	let arrExperience: string[] = [];
-	const searchButton = () => {
-		// console.log(check[])
 
+	const searchButton = () => {
 		let scheduleChecked = document.querySelectorAll('.filters-popup__schedule:checked')
 		let employmentChecked = document.querySelectorAll('.filters-popup__employment:checked')
 		let expreienceChecked = document.querySelectorAll('.filters-popup__experience:checked')
-		// scheduleChecked as unknown as HTMLInputElement;
-		// employmentChecked as unknown as HTMLInputElement;
-		// expreienceChecked as unknown as HTMLInputElement;
-		console.log()
+
 		scheduleChecked.forEach((el: any) => arrSchedule.push(el.name))
 		employmentChecked.forEach((el: any) => arrEmployment.push(el.name))
 		expreienceChecked.forEach((el: any) => arrExperience.push(el.name))
 
 		dispatch(actionFilter('schedule', arrSchedule))
 		dispatch(actionFilter('employment', arrEmployment))
-		dispatch(actionFilter('expreience', arrExperience))
+		dispatch(actionFilter('experience', arrExperience))
 	}
-	// window.addEventListener('click', () => {
-	// 	console.log(document.querySelectorAll('.filters-popup__schedule:checked'))
-	// })
 
 	const classActivePopupSchedule = schedule ? 'd-block' : null;
 	const classActivePopupEmployment = employment ? 'd-block' : null;
@@ -174,10 +150,10 @@ const SearchBar: React.FC = () => {
 						checked={check[sheduleNameShift]}
 						onChange={soldCheckbox}
 						className="filters-popup__schedule"
-						id="filters-popup__schedule13"
+						id="filters-popup__schedule14"
 						name={sheduleNameShift} />
 					<label className="filters-popup__label"
-						htmlFor="filters-popup__schedule13">Сменный график</label>
+						htmlFor="filters-popup__schedule14">Сменный график</label>
 				</div>
 			</div>
 		)

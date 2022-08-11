@@ -7,15 +7,18 @@ import { fetchVacancy } from '../../actions/vacancy';
 import { useDispatch } from 'react-redux';
 
 const VacanciesItem: React.FC<{
-	filter: {},
+	filter: any,
 	vacanciesItemBlock: any,
 	vacanciesItemBlockFilterSchedule: any
 }> = ({ filter,
 	vacanciesItemBlock,
 	vacanciesItemBlockFilterSchedule }) => {
 
-		// return (!Object.values(['schedule']).length) ? vacanciesItemBlock : vacanciesItemBlockFilterSchedule
-		return vacanciesItemBlockFilterSchedule
+		return (
+			!filter['schedule'].length &&
+			!filter['employment'].length &&
+			!filter['experience'].length) ? vacanciesItemBlock : vacanciesItemBlockFilterSchedule
+		// return vacanciesItemBlock
 
 	}
 
@@ -28,9 +31,7 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 		schedule,
 		employment,
 		experience } = vacanciesItem;
-
 	const dispatch = useDispatch()
-
 
 	let publishedDate = new Date(published_at).getDate() + '.'
 		+ Number(new Date(published_at).getMonth() + 1) + '.'
@@ -64,19 +65,17 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 			</div>
 		</div>
 	)
+	console.log(Object.values(filter).filter((item: any) => item.includes(schedule.id)))
 
-	// Object.values(filter).map((item: any) => {
-	// 	// if (item.includes(schedule.id)) console.log(true)
-
-
-
-	// })
-	console.log(Object.values(filter).map((item: any) => item.includes(schedule.id)));
-
-	const vacanciesItemBlockFilterSchedule = (Object.values(filter).map((item: any) => item.includes(schedule.id))) ? (
+	// const vacanciesItemBlockFilterSchedule = () => {
+	// 	Object.values(filter).filter((item: any) => {
+	// 		let arrFiltered: [] = []
+	// 		// arrFiltered.push(item.includes(schedule.id), item.includes(employment.id), item.includes(experience.id))
+	// 	})
+	// }
+	const vacanciesItemBlockFilterSchedule = (Object.values(filter).filter((item: any) => item.includes(schedule.id))) ? (
 		<div className="vacancies__item"
 			onClick={onVacancySelected}>
-
 			<div className="vacancies__line"></div>
 			<div className="vacancies__logo-block">
 				<div className="vacancies__logo">
@@ -98,7 +97,6 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 		</div>
 	) : null
 
-	// console.log(filter)
 	return <VacanciesItem
 		filter={filter}
 		vacanciesItemBlock={vacanciesItemBlock}
