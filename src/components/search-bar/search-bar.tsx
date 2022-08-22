@@ -9,9 +9,13 @@ import filterIconImg4 from '../../assets/img/Vector4.png';
 import filterIconImg5 from '../../assets/img/Vector5.png';
 import { useDispatch } from 'react-redux';
 import { actionFilter } from '../../actions/filters';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { actionParams } from '../../actions/params';
+import { fetchVacancies } from '../../actions/vacancies';
 
 
 const SearchBar: React.FC = () => {
+	const { filter } = useTypedSelector(state => state.vacanciesData)
 	const dispatch = useDispatch();
 	const [schedule, setSchedule] = useState(false);
 	const [employment, setEmployment] = useState(false);
@@ -43,8 +47,6 @@ const SearchBar: React.FC = () => {
 	const experienceName1And3 = 'between1And3';
 	const experienceName3And6 = 'between3And6';
 	const experienceNameMore6 = 'moreThan6';
-
-
 
 	const popupRef1 = useRef<HTMLInputElement>(null)
 	const popupRef2 = useRef<HTMLInputElement>(null)
@@ -106,6 +108,20 @@ const SearchBar: React.FC = () => {
 		dispatch(actionFilter('schedule', arrSchedule))
 		dispatch(actionFilter('employment', arrEmployment))
 		dispatch(actionFilter('experience', arrExperience))
+
+		// console.log(Object.entries(filter));
+		let res: any
+		Object.entries(filter).reduce((acc: any, [key, value]) => {
+
+			if (value != 0) {
+				acc += key + '=' + value + '&';
+			}
+			res = acc
+			return acc
+
+		}, "")
+		dispatch(actionParams(res))
+		dispatch(fetchVacancies(res))
 	}
 
 	const classActivePopupSchedule = schedule ? 'd-block' : null;
