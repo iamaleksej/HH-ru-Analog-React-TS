@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 const VacanciesBar: React.FC = () => {
 	const { vacancies, loading, error, filter, params } = useTypedSelector(state => state.vacanciesData)
 	const dispatch = useDispatch()
-	console.log('params = ' + params);
+	// console.log('params = ' + params);
 
 	useEffect(() => {
 		dispatch(fetchVacancies(params))

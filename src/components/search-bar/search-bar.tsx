@@ -15,7 +15,7 @@ import { fetchVacancies } from '../../actions/vacancies';
 
 
 const SearchBar: React.FC = () => {
-	const { filter } = useTypedSelector(state => state.vacanciesData)
+	const { filter, params } = useTypedSelector(state => state.vacanciesData)
 	const dispatch = useDispatch();
 	const [schedule, setSchedule] = useState(false);
 	const [employment, setEmployment] = useState(false);
@@ -110,18 +110,17 @@ const SearchBar: React.FC = () => {
 		dispatch(actionFilter('experience', arrExperience))
 
 		// console.log(Object.entries(filter));
-		let res: any
-		Object.entries(filter).reduce((acc: any, [key, value]) => {
+		// let res: any
+		const result = Object.entries(filter).reduce((acc: any, [key, value]) => {
 
 			if (value != 0) {
 				acc += key + '=' + value + '&';
 			}
-			res = acc
 			return acc
-
 		}, "")
-		dispatch(actionParams(res))
-		dispatch(fetchVacancies(res))
+		// console.log(result)
+		dispatch(actionParams(result))
+		dispatch(fetchVacancies(result))
 	}
 
 	const classActivePopupSchedule = schedule ? 'd-block' : null;
