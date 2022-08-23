@@ -11,10 +11,7 @@ const VacanciesItem: React.FC<{
 	vacanciesItemBlock: any,
 }> = ({ filter,
 	vacanciesItemBlock }) => {
-
 		return vacanciesItemBlock
-
-
 	}
 
 const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> = ({ vacanciesItem, filter }) => {
@@ -50,8 +47,8 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 			</div>
 			<div className="vacancies__icon-block">
 				<div className="vacancies__icon-favorite">
-					<img src={iconFavorite} alt="" className="image " />
-					<img src={iconNoFavorite} alt="" className="image icon-favorite-active" />
+					<img src={iconNoFavorite} alt="" className="image" />
+					{/* <img src={iconFavorite} alt="" className="image " /> */}
 				</div>
 				<div className="vacancies__date">{publishedDate}</div>
 			</div>
