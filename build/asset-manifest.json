@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/HH-ru-Analog-React-TS/static/css/main.fafae22d.css",
-    "main.js": "/HH-ru-Analog-React-TS/static/js/main.d4b3934c.js",
+    "main.js": "/HH-ru-Analog-React-TS/static/js/main.ba866623.js",
     "index.html": "/HH-ru-Analog-React-TS/index.html",
     "main.fafae22d.css.map": "/HH-ru-Analog-React-TS/static/css/main.fafae22d.css.map",
-    "main.d4b3934c.js.map": "/HH-ru-Analog-React-TS/static/js/main.d4b3934c.js.map"
+    "main.ba866623.js.map": "/HH-ru-Analog-React-TS/static/js/main.ba866623.js.map"
   },
   "entrypoints": [
     "static/css/main.fafae22d.css",
-    "static/js/main.d4b3934c.js"
+    "static/js/main.ba866623.js"
   ]
 }
