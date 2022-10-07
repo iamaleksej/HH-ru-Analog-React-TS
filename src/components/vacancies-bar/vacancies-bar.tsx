@@ -9,12 +9,11 @@ import { useDispatch } from 'react-redux';
 
 
 const VacanciesBar: React.FC = () => {
-	const { vacancies, loading, error, filter, params } = useTypedSelector(state => state.vacanciesData)
+	const { vacancies, loading, error, filter } = useTypedSelector(state => state.vacanciesData)
 	const dispatch = useDispatch()
-	// console.log('params = ' + params);
 
 	useEffect(() => {
-		dispatch(fetchVacancies(params))
+		dispatch(fetchVacancies())
 	}, [])
 
 	if (loading) {
@@ -26,7 +25,7 @@ const VacanciesBar: React.FC = () => {
 	}
 
 	const vacItems = vacancies.items;
-	// console.log(filter)
+	console.log(filter)
 	return (
 		<div className="vacancies-bar">
 			<div className="vacancies">

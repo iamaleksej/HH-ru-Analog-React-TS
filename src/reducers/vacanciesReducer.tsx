@@ -8,16 +8,9 @@ const initialState: VacanciesState = {
 		'schedule': [],
 		'employment': [],
 		'experience': []
-	},
-	params: ''
+	}
 }
-
-
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {
-	console.log(state.filter);
-
-	console.log('params = ' + state.params);
-
 	switch (action.type) {
 		case VacanciesActionTypes.FETCH_VACANCIES:
 			return {
@@ -42,11 +35,6 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 					...state.filter,
 					[action.payload.filterName]: action.payload.filterData
 				}
-			}
-		case VacanciesActionTypes.VACANCIES_PARAMS:
-			return {
-				...state,
-				params: action.payload
 			}
 		default:
 			return state;
