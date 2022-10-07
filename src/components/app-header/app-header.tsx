@@ -9,12 +9,12 @@ const AppHeader: React.FC = () => {
 		<header className="header_wrapper">
 			<div className="header">
 				<div className="header__logo_wrapper">
-					<Link to="/HH-ru-Analog-React-TS/" className="header__logo">
+					<Link to="/HH-ru-Analog-React-TS" className="header__logo">
 						<span className="color_red">hh</span>ANALOG
 					</Link>
 				</div>
 				<nav className="menu">
-					<Link to="/HH-ru-Analog-React-TS/" className="menu__item">
+					<Link to="/HH-ru-Analog-React-TS" className="menu__item">
 						Поиск ваканский
 					</Link>
 					<Link to="/favorites/" className="menu__item">
