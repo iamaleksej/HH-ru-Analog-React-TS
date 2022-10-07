@@ -37,7 +37,7 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 			<div className="vacancies__line"></div>
 			<div className="vacancies__logo-block">
 				<div className="vacancies__logo">
-					<img src={(employer.logo_urls === null) ? '' : employer.logo_urls.original} alt="Logo" className="image" />
+					<img src={(employer?.logo_urls === null) ? '' : employer?.logo_urls?.original} alt="Logo" className="image" />
 				</div>
 			</div>
 			<div className="vacancies__data-block">

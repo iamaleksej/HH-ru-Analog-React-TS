@@ -37,7 +37,7 @@ const Vacancy: React.FC = () => {
 						<div className="vacancy-header">
 							<div className="vacancy-header__upper-wrapper">
 								<div className="vacancy-header__logo">
-									<img src={(employer.logo_urls === null) ? '' : employer.logo_urls.original} alt="Logo" className="image" />
+									<img src={(employer?.logo_urls === null) ? '' : employer?.logo_urls?.original} alt="Logo" className="image" />
 								</div>
 								<div className="vacancy-header__title-company-city-wrapper">
 									<p className="vacancy-header__title">{name}</p>
