@@ -2,8 +2,7 @@ export interface VacanciesState {
 	vacancies: { items: IVacancy[] };
 	loading: boolean;
 	error: null | string;
-	filter: {};
-	params: string
+	filter: {}
 }
 
 export interface VacancyState {
@@ -41,8 +40,7 @@ export enum VacanciesActionTypes {
 	FETCH_VACANCIES = 'FETCH_VACANCIES',
 	FETCH_VACANCIES_SUCCESS = 'FETCH_VACANCIES_SUCCESS',
 	FETCH_VACANCIES_ERROR = 'FETCH_VACANCIES_ERROR',
-	VACANCIES_FILTERED = 'VACANCIES_FILTERED',
-	VACANCIES_PARAMS = 'VACANCIES_PARAMS',
+	VACANCIES_FILTERED = 'VACANCIES_FILTERED'
 }
 
 interface FetchVacanciesAction {
@@ -59,10 +57,6 @@ interface FetchVacanciesErrorAction {
 interface VacanciesFilteredAction {
 	type: VacanciesActionTypes.VACANCIES_FILTERED;
 	payload: any
-}
-interface VacanciesParamsAction {
-	type: VacanciesActionTypes.VACANCIES_PARAMS;
-	payload: string
 }
 
 export enum VacancyActionTypes {
@@ -83,5 +77,5 @@ interface FetchVacancyErrorAction {
 	payload: string;
 }
 
-export type VacanciesAction = FetchVacanciesAction | FetchVacanciesSuccesAction | FetchVacanciesErrorAction | VacanciesFilteredAction | VacanciesParamsAction;
+export type VacanciesAction = FetchVacanciesAction | FetchVacanciesSuccesAction | FetchVacanciesErrorAction | VacanciesFilteredAction;
 export type VacancyAction = FetchVacancyAction | FetchVacancySuccesAction | FetchVacancyErrorAction;
