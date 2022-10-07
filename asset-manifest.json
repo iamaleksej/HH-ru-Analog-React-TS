@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/calc-test-app/HH-ru-Analog-React-TS/static/css/main.fafae22d.css",
+    "main.js": "/calc-test-app/HH-ru-Analog-React-TS/static/js/main.a43bbe9a.js",
+    "index.html": "/calc-test-app/HH-ru-Analog-React-TS/index.html",
+    "main.fafae22d.css.map": "/calc-test-app/HH-ru-Analog-React-TS/static/css/main.fafae22d.css.map",
+    "main.a43bbe9a.js.map": "/calc-test-app/HH-ru-Analog-React-TS/static/js/main.a43bbe9a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fafae22d.css",
+    "static/js/main.a43bbe9a.js"
+  ]
+}
