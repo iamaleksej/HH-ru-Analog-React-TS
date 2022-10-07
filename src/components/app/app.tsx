@@ -14,7 +14,7 @@ export default class App extends React.Component {
 				<main role="main" className="container">
 					<Routes>
 						<Route
-							path="/"
+							path="/HH-ru-Analog-React-TS"
 							element={<HomePage />}
 						/>
 					</Routes>
