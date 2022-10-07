@@ -2,7 +2,7 @@
   "name": "hh-analogg",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://iamaleksej.github.io/calc-test-app/HH-ru-Analog-React-TS/",
+  "homepage": "https://iamaleksej.github.io/HH-ru-Analog-React-TS/",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@testing-library/jest-dom": "^5.16.1",
