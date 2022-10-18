@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import useLatest from 'use-latest';
-import { useForm } from "react-hook-form";
 import './search-bar.sass';
 import filterIconImg1 from '../../assets/img/Vector.png';
 import filterIconImg2 from '../../assets/img/Vector2.png';
@@ -17,24 +16,6 @@ import { fetchVacancies } from '../../actions/vacancies';
 const SearchBar: React.FC = () => {
 	const { filter, params } = useTypedSelector(state => state.vacanciesData)
 	const dispatch = useDispatch();
-	const [schedule, setSchedule] = useState(false);
-	const [employment, setEmployment] = useState(false);
-	const [experience, setExperience] = useState(false);
-
-	const [check, setCheck] = useState({
-		'fullDay': false,
-		'flexible': false,
-		'remote': false,
-		'shift': false,
-		'full': false,
-		'little': false,
-		'project': false,
-		'intern': false,
-		'noExperience': false,
-		'between1And3': false,
-		'between3And6': false,
-		'moreThan6': false
-	});
 	const sheduleNameFull = 'fullDay';
 	const sheduleNameFlex = 'flexible';
 	const sheduleNameRemote = 'remote';
@@ -48,14 +29,51 @@ const SearchBar: React.FC = () => {
 	const experienceName3And6 = 'between3And6';
 	const experienceNameMore6 = 'moreThan6';
 
+	// const scheduleTitle = 'schedule';
+	// const employmentTitle = 'schedule';
+	// const experienceTitle = 'schedule';
+
 	const popupRef1 = useRef<HTMLInputElement>(null)
 	const popupRef2 = useRef<HTMLInputElement>(null)
 	const popupRef3 = useRef<HTMLInputElement>(null)
 
-	const soldCheckbox = (e: any) => {
-		setCheck(prevState => ({ ...prevState, [e.target.name]: e.target.checked }))
+	const [schedule, setSchedule] = useState(false);
+	const [employment, setEmployment] = useState(false);
+	const [experience, setExperience] = useState(false);
+
+	const [checkboxSchedule, setCheckboxSchedule] = useState<any>({
+		'fullDay': false,
+		'flexible': false,
+		'remote': false,
+		'shift': false,
+	});
+	const [checkboxEmployment, setCheckboxEmployment] = useState<any>({
+		'full': false,
+		'little': false,
+		'project': false,
+		'intern': false,
+	});
+	const [checkboxExperience, setCheckboxExperience] = useState<any>({
+		'noExperience': false,
+		'between1And3': false,
+		'between3And6': false,
+		'moreThan6': false
+	});
+
+	const handleChangeCheckbox = (e: any, stateCheckbox: any, setStateCheckbox: any) => {
+		const { name, checked } = e.target
+		Object.keys(stateCheckbox).map(key => stateCheckbox[key] = false)
+		setStateCheckbox((prevState: any) => ({ ...prevState, [name]: checked }))
+
 	}
 
+	let arrSchedule: string[] = [];
+	let arrEmployment: string[] = [];
+	let arrExperience: string[] = [];
+
+	const createFilterArr = (checkboxState: any, arrFilter: string[]) => {
+		Object.keys(checkboxState).map((item: any) => checkboxState[item] ? arrFilter.push(item) : null)
+	}
 	const onClose = () => {
 		setSchedule(false);
 		setEmployment(false);
@@ -92,37 +110,57 @@ const SearchBar: React.FC = () => {
 	useOutsideClick(popupRef2, onClose, employment);
 	useOutsideClick(popupRef3, onClose, experience);
 
-	let arrSchedule: string[] = [];
-	let arrEmployment: string[] = [];
-	let arrExperience: string[] = [];
-
-	const searchButton = () => {
-		let scheduleChecked = document.querySelectorAll('.filters-popup__schedule:checked')
-		let employmentChecked = document.querySelectorAll('.filters-popup__employment:checked')
-		let expreienceChecked = document.querySelectorAll('.filters-popup__experience:checked')
-
-		scheduleChecked.forEach((el: any) => arrSchedule.push(el.name))
-		employmentChecked.forEach((el: any) => arrEmployment.push(el.name))
-		expreienceChecked.forEach((el: any) => arrExperience.push(el.name))
+	useEffect(() => {
+		createFilterArr(checkboxSchedule, arrSchedule)
+		createFilterArr(checkboxEmployment, arrEmployment)
+		createFilterArr(checkboxExperience, arrExperience)
 
 		dispatch(actionFilter('schedule', arrSchedule))
 		dispatch(actionFilter('employment', arrEmployment))
 		dispatch(actionFilter('experience', arrExperience))
+		// console.log(filter);
 
-		// console.log(Object.entries(filter));
-		// let res: any
-		const result = Object.entries(filter).reduce((acc: any, [key, value]) => {
+		// const result = Object.entries(filter).reduce((acc: any, [key, value]) => {
 
-			if (value != 0) {
-				acc += key + '=' + value + '&';
-			}
-			return acc
-		}, "")
+		// 	if (value != 0) {
+		// 		acc += key + '=' + value + '&';
+		// 	}
+		// 	return acc
+		// }, "")
+
+		// dispatch(actionParams(result))
+		// console.log(params);
+
+	}, [checkboxSchedule, checkboxEmployment, checkboxExperience])
+
+
+	const searchButton = () => {
+		console.log(params);
+
+		dispatch(fetchVacancies(params))
+		// createFilterArr(checkboxSchedule, arrSchedule)
+		// createFilterArr(checkboxEmployment, arrEmployment)
+		// createFilterArr(checkboxExperience, arrExperience)
+		// console.log(arrSchedule, arrEmployment, arrExperience);
+
+		// dispatch(actionFilter('schedule', arrSchedule))
+		// dispatch(actionFilter('employment', arrEmployment))
+		// dispatch(actionFilter('experience', arrExperience))
+
+
+
+
+		// const result = Object.entries(filter).reduce((acc: any, [key, value]) => {
+
+		// 	if (value != 0) {
+		// 		acc += key + '=' + value + '&';
+		// 	}
+		// 	return acc
+		// }, "")
 		// console.log(result)
-		dispatch(actionParams(result))
-		dispatch(fetchVacancies(result))
+		// dispatch(actionParams(result))
+		// dispatch(fetchVacancies(params))
 	}
-
 	const classActivePopupSchedule = schedule ? 'd-block' : null;
 	const classActivePopupEmployment = employment ? 'd-block' : null;
 	const classActivePopupExperience = experience ? 'd-block' : null;
@@ -132,18 +170,19 @@ const SearchBar: React.FC = () => {
 			<div className={`filters-popup ${classActivePopupSchedule}`} ref={popupRef1}>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[sheduleNameFull]}
-						onChange={soldCheckbox}
+						checked={checkboxSchedule[sheduleNameFull]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxSchedule, setCheckboxSchedule)}
 						className="filters-popup__schedule"
 						id="filters-popup__schedule11"
 						name={sheduleNameFull} />
+
 					<label className="filters-popup__label"
 						htmlFor="filters-popup__schedule11">Полный день</label>
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[sheduleNameFlex]}
-						onChange={soldCheckbox}
+						checked={checkboxSchedule[sheduleNameFlex]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxSchedule, setCheckboxSchedule)}
 						className="filters-popup__schedule"
 						id="filters-popup__schedule12"
 						name={sheduleNameFlex} />
@@ -152,8 +191,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[sheduleNameRemote]}
-						onChange={soldCheckbox}
+						checked={checkboxSchedule[sheduleNameRemote]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxSchedule, setCheckboxSchedule)}
 						className="filters-popup__schedule"
 						id="filters-popup__schedule13"
 						name={sheduleNameRemote} />
@@ -162,8 +201,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[sheduleNameShift]}
-						onChange={soldCheckbox}
+						checked={checkboxSchedule[sheduleNameShift]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxSchedule, setCheckboxSchedule)}
 						className="filters-popup__schedule"
 						id="filters-popup__schedule14"
 						name={sheduleNameShift} />
@@ -179,8 +218,8 @@ const SearchBar: React.FC = () => {
 			<div className={`filters-popup ${classActivePopupEmployment}`} ref={popupRef2}>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[employmentNameFull]}
-						onChange={soldCheckbox}
+						checked={checkboxEmployment[employmentNameFull]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxEmployment, setCheckboxEmployment)}
 						className="filters-popup__employment"
 						id="filters-popup__employment21"
 						name={employmentNameFull} />
@@ -189,8 +228,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[employmentNameLittle]}
-						onChange={soldCheckbox}
+						checked={checkboxEmployment[employmentNameLittle]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxEmployment, setCheckboxEmployment)}
 						className="filters-popup__employment"
 						id="filters-popup__employment22"
 						name={employmentNameLittle} />
@@ -199,8 +238,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[employmentNameProject]}
-						onChange={soldCheckbox}
+						checked={checkboxEmployment[employmentNameProject]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxEmployment, setCheckboxEmployment)}
 						className="filters-popup__employment"
 						id="filters-popup__employment23"
 						name={employmentNameProject} />
@@ -209,8 +248,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[employmentNameIntern]}
-						onChange={soldCheckbox}
+						checked={checkboxEmployment[employmentNameIntern]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxEmployment, setCheckboxEmployment)}
 						className="filters-popup__employment"
 						id="filters-popup__employment24"
 						name={employmentNameIntern} />
@@ -226,8 +265,8 @@ const SearchBar: React.FC = () => {
 			<div className={`filters-popup ${classActivePopupExperience}`} ref={popupRef3}>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[experienceNameNoExp]}
-						onChange={soldCheckbox}
+						checked={checkboxExperience[experienceNameNoExp]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxExperience, setCheckboxExperience)}
 						className="filters-popup__experience"
 						id="filters-popup__experience31"
 						name={experienceNameNoExp} />
@@ -236,8 +275,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[experienceName3And6]}
-						onChange={soldCheckbox}
+						checked={checkboxExperience[experienceName3And6]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxExperience, setCheckboxExperience)}
 						className="filters-popup__experience"
 						id="filters-popup__experience32"
 						name={experienceName3And6} />
@@ -246,8 +285,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[experienceName1And3]}
-						onChange={soldCheckbox}
+						checked={checkboxExperience[experienceName1And3]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxExperience, setCheckboxExperience)}
 						className="filters-popup__experience"
 						id="filters-popup__experience33"
 						name={experienceName1And3} />
@@ -256,8 +295,8 @@ const SearchBar: React.FC = () => {
 				</div>
 				<div className="filters-popup__item">
 					<input type="checkbox"
-						checked={check[experienceNameMore6]}
-						onChange={soldCheckbox}
+						checked={checkboxExperience[experienceNameMore6]}
+						onChange={(e) => handleChangeCheckbox(e, checkboxExperience, setCheckboxExperience)}
 						className="filters-popup__experience"
 						id="filters-popup__experience34"
 						name={experienceNameMore6} />

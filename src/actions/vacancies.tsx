@@ -7,7 +7,7 @@ export const fetchVacancies = (params: string) => {
 		try {
 			dispatch({ type: VacanciesActionTypes.FETCH_VACANCIES })
 			const response = await axios.get(`https://api.hh.ru/vacancies?${params}`)
-			console.log(response);
+			// console.log(response);
 
 			dispatch({ type: VacanciesActionTypes.FETCH_VACANCIES_SUCCESS, payload: response.data })
 		} catch (e) {

@@ -14,9 +14,16 @@ const initialState: VacanciesState = {
 
 
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {
-	console.log(state.filter);
+	state.params = Object.entries(state.filter).reduce((acc: any, [key, value]) => {
 
-	console.log('params = ' + state.params);
+		if (value != 0) {
+			acc += key + '=' + value + '&';
+		}
+		return acc
+	}, "")
+	console.log(state.params);
+
+	// console.log('params = ' + state.params);
 
 	switch (action.type) {
 		case VacanciesActionTypes.FETCH_VACANCIES:
@@ -51,5 +58,6 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 		default:
 			return state;
 	}
+
 }
 
