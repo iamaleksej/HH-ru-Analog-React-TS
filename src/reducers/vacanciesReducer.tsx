@@ -12,7 +12,6 @@ const initialState: VacanciesState = {
 	params: ''
 }
 
-
 export const vacanciesReducer = (state = initialState, action: VacanciesAction): VacanciesState => {
 	state.params = Object.entries(state.filter).reduce((acc: any, [key, value]) => {
 
@@ -21,17 +20,20 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 		}
 		return acc
 	}, "")
-	console.log(state.params);
+	// console.log(state.params);
 
 	// console.log('params = ' + state.params);
 
 	switch (action.type) {
 		case VacanciesActionTypes.FETCH_VACANCIES:
+
 			return {
 				...state,
 				loading: true
 			}
+
 		case VacanciesActionTypes.FETCH_VACANCIES_SUCCESS:
+			// console.log(state.vacancies)
 			return {
 				...state,
 				loading: false,
@@ -58,6 +60,7 @@ export const vacanciesReducer = (state = initialState, action: VacanciesAction):
 		default:
 			return state;
 	}
+
 
 }
 

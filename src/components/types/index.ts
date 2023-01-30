@@ -1,13 +1,20 @@
 export interface VacanciesState {
-	vacancies: { items: IVacancy[] };
+	vacancies: { items: IVacancy[] | [] };
 	loading: boolean;
 	error: null | string;
-	filter: {};
+	// filters: { [key in 'schedule' | 'empoloyment' | 'experience']: [] }
+	filter: {}
 	params: string
 }
 
 export interface VacancyState {
 	vacancy: any;
+	loading: boolean;
+	error: null | string
+}
+
+export interface FavoritesState {
+	favorites: any;
 	loading: boolean;
 	error: null | string
 }
@@ -50,7 +57,7 @@ interface FetchVacanciesAction {
 }
 interface FetchVacanciesSuccesAction {
 	type: VacanciesActionTypes.FETCH_VACANCIES_SUCCESS;
-	payload: { items: [] };
+	payload: { items: IVacancy[] | [] };
 }
 interface FetchVacanciesErrorAction {
 	type: VacanciesActionTypes.FETCH_VACANCIES_ERROR;
@@ -83,5 +90,24 @@ interface FetchVacancyErrorAction {
 	payload: string;
 }
 
+export enum FavoritesActionTypes {
+	FETCH_FAVORITES = 'FETCH_FAVORITES',
+	FETCH_FAVORITES_SUCCESS = 'FETCH_FAVORITES_SUCCESS',
+	FETCH_FAVORITES_ERROR = 'FETCH_FAVORITES_ERROR',
+}
+
+interface FetchFavoritesAction {
+	type: FavoritesActionTypes.FETCH_FAVORITES;
+}
+interface FetchFavoritesSuccesAction {
+	type: FavoritesActionTypes.FETCH_FAVORITES_SUCCESS;
+	payload: {};
+}
+interface FetchFavoritesErrorAction {
+	type: FavoritesActionTypes.FETCH_FAVORITES_ERROR;
+	payload: string;
+}
+
 export type VacanciesAction = FetchVacanciesAction | FetchVacanciesSuccesAction | FetchVacanciesErrorAction | VacanciesFilteredAction | VacanciesParamsAction;
 export type VacancyAction = FetchVacancyAction | FetchVacancySuccesAction | FetchVacancyErrorAction;
+export type FavoritesAction = FetchFavoritesAction | FetchFavoritesSuccesAction | FetchFavoritesErrorAction;

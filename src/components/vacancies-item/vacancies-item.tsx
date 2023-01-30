@@ -5,6 +5,7 @@ import iconFavorite from '../../assets/img/icon-favorite-active.png';
 import { IVacancy } from '../types';
 import { fetchVacancy } from '../../actions/vacancy';
 import { useDispatch } from 'react-redux';
+import { fetchFavorites } from '../../actions/favorites';
 
 const VacanciesItem: React.FC<{
 	filter: any,
@@ -29,6 +30,9 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 	const onVacancySelected = () => {
 		dispatch(fetchVacancy(id))
 	}
+	const onFavoriteSelected = () => {
+		dispatch(fetchFavorites(id))
+	}
 
 	const vacanciesItemBlock = (
 		<div className="vacancies__item"
@@ -47,7 +51,10 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 			</div>
 			<div className="vacancies__icon-block">
 				<div className="vacancies__icon-favorite">
-					<img src={iconNoFavorite} alt="" className="image" />
+					<img src={iconNoFavorite}
+						alt=""
+						className="image"
+						onClick={onFavoriteSelected} />
 					{/* <img src={iconFavorite} alt="" className="image " /> */}
 				</div>
 				<div className="vacancies__date">{publishedDate}</div>
