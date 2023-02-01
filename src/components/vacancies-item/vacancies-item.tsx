@@ -43,7 +43,7 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 	}
 	// console.log(isFavorite);
 
-	const checkFavorite = (
+	const checkFavorite = useMemo(() => () => {
 		favorites.map((favItem: any) => {
 			vacItems.map((vacItem: any) => {
 				if (favItem.id === vacItem.id) {
@@ -68,7 +68,7 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 				}
 			})
 		})
-	)
+	}, [favorites, vacItems])
 
 	const vacanciesItemBlock = (
 		<div className="vacancies__item"
