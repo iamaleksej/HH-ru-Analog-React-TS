@@ -5,6 +5,7 @@ import VacanciesBar from '../vacancies-bar';
 
 const FavoritesPage: React.FC = () => {
    const { favorites, loading, error } = useTypedSelector(state => state.favoritesData);
+   console.log(favorites);
 
    return (
       <>

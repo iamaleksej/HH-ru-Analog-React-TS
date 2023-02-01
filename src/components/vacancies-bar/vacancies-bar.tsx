@@ -31,7 +31,6 @@ const VacanciesBar = ({ vacancies }: IVacancy[] | [] | any, { loading, error, fi
 		return <h1>{error}</h1>
 	}
 
-	const vacItems = vacancies;
 	// console.log(filter)
 	return (
 		<div className="vacancies-bar">

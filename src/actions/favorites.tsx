@@ -10,10 +10,11 @@ export const fetchFavorites = (id: number) => {
          dispatch({ type: FavoritesActionTypes.FETCH_FAVORITES })
          const response = await axios.get(`https://api.hh.ru/vacancies/${id}`)
          let check: Boolean = false
-         favoritesArr.map(item => {
+         favoritesArr.map((item, index) => {
 
             if (item.id === id) {
                check = true
+               favoritesArr.splice(index, 1)
             }
          })
          if (!check) {
