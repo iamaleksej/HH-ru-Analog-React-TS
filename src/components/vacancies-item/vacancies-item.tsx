@@ -76,7 +76,7 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 		)
 	}, [favorites, vacItems])
 
-	console.log(memoizedCheckFavorite);
+	// console.log(memoizedCheckFavorite);
 
 	const vacanciesItemBlock = (
 		<div className="vacancies__item"
@@ -96,13 +96,13 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 			<div className="vacancies__icon-block">
 				<div className="vacancies__icon-favorite">
 
-					{memoizedCheckFavorite}
-					{/* <img
+					{/* {memoizedCheckFavorite} */}
+					<img
 						// src={checkFavorite()}
 						src={isFavorite ? iconFavorite : iconNoFavorite}
 						alt=""
 						className="image"
-						onClick={onFavoriteSelected} /> */}
+						onClick={onFavoriteSelected} />
 
 				</div>
 				<div className="vacancies__date">{publishedDate}</div>
