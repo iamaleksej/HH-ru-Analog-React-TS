@@ -43,32 +43,40 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 	}
 	// console.log(isFavorite);
 
-	const checkFavorite = useMemo(() => () => {
-		favorites.map((favItem: any) => {
+	const memoizedCheckFavorite = useMemo(() => {
+		return (
 			vacItems.map((vacItem: any) => {
-				if (favItem.id === vacItem.id) {
+				if (favorites.length) {
 					return (
-						<img
-							// src={checkFavorite()}
-							src={iconFavorite}
-							alt=""
-							className="image"
-							onClick={onFavoriteSelected} />
+						favorites.map((favItem: any) => {
+							if (favItem.id === vacItem.id) {
+								console.log('true');
+								return (
+									<img
+										src={iconFavorite}
+										alt=""
+										className="image"
+										onClick={onFavoriteSelected} />
+								)
+							}
+						})
 					)
 				}
 				else {
 					return (
 						<img
-							// src={checkFavorite()}
 							src={iconNoFavorite}
 							alt=""
 							className="image"
 							onClick={onFavoriteSelected} />
 					)
 				}
-			})
-		})
+			}
+			)
+		)
 	}, [favorites, vacItems])
+
+	console.log(memoizedCheckFavorite);
 
 	const vacanciesItemBlock = (
 		<div className="vacancies__item"
@@ -88,7 +96,7 @@ const VacanciesItemContainer: React.FC<{ vacanciesItem: IVacancy, filter: {} }> 
 			<div className="vacancies__icon-block">
 				<div className="vacancies__icon-favorite">
 
-					{checkFavorite}
+					{memoizedCheckFavorite}
 					{/* <img
 						// src={checkFavorite()}
 						src={isFavorite ? iconFavorite : iconNoFavorite}
